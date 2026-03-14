@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LinkNest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <script>
+    /* ============================================
+       LINKNEST CONFIG -- Edit this section only!
+    ================================================
+
+    THEME OPTIONS:
+      darkMode: true       -> forces dark mode
+      darkMode: false      -> forces light mode
+      darkMode: "toggle"   -> shows a toggle button for visitors
+      darkMode: "custom"   -> uses your customBg + customText colors
+
+    ============================================ */
+    const CONFIG = {
+      darkMode:   "toggle",
+      customBg:   "#1a1a2e",
+      customText: "#eaeaea",
+
+      name:     "Your Name",
+      username: "@yourhandle",
+      bio:      "Creator. Builder. Dreamer.",
+      avatar:   "",
+
+      links: [
+        { label: "My Website",  url: "#" },
+        { label: "Twitter / X", url: "https://twitter.com/yourhandle" },
+        { label: "LinkedIn",    url: "https://linkedin.com/in/yourprofile" },
+        { label: "Instagram",   url: "https://instagram.com/yourhandle" },
+        { label: "GitHub",      url: "https://github.com/yourusername" }
+      ]
+    };
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f; --surface: #1a1a1a; --border: #2a2a2a;
+      --text: #f0f0f0; --muted: #888; --radius: 14px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem 1rem 4rem; transition: background 0.3s, color 0.3s;
+    }
+    #themeToggle {
+      position: fixed; top: 1.2rem; right: 1.2rem;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 0.4rem 0.9rem; border-radius: 999px;
+      cursor: pointer; font-size: 0.8rem; font-family: 'Inter', sans-serif;
+      font-weight: 500; transition: all 0.2s; display: none;
+    }
+    #themeToggle:hover { border-color: var(--text); }
+    .card { width: 100%; max-width: 480px; display: flex; flex-direction: column; align-items: center; }
+    .avatar-wrap {
+      width: 88px; height: 88px; border-radius: 50%; overflow: hidden;
+      background: var(--surface); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800; color: var(--muted);
+    }
+    .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-name { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.2rem; text-align: center; }
+    .profile-username { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .profile-bio { font-size: 0.9rem; color: var(--muted); text-align: center; margin-bottom: 2rem; line-height: 1.5; }
+    .links { width: 100%; display: flex; flex-direction: column; gap: 0.75rem; }
+    .link-btn {
+      display: block; width: 100%; padding: 0.95rem 1.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); color: var(--text); text-decoration: none;
+      font-size: 0.95rem; font-weight: 500; text-align: center; transition: all 0.2s;
+    }
+    .link-btn:hover {
+      background: var(--text); color: var(--bg); border-color: var(--text);
+      transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .footer { margin-top: 2.5rem; font-size: 0.75rem; color: var(--muted); text-align: center; }
+    .footer a { color: var(--muted); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+    .footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+  <button id="themeToggle">☀️ Light</button>
+  <div class="card">
+    <div class="avatar-wrap" id="avatar"></div>
+    <div class="profile-name"     id="profileName"></div>
+    <div class="profile-username" id="profileUsername"></div>
+    <div class="profile-bio"      id="profileBio"></div>
+    <div class="links"            id="linkList"></div>
+    <div class="footer">
+      <p>LinkNest was made by <a href="https://github.com/bloxiebuilds" target="_blank">bloxiebuilds</a></p>
+    </div>
+  </div>
+  <script>
+    const btn = document.getElementById('themeToggle');
+    let isDark = true;
+
+    function setDark() {
+      document.documentElement.style.setProperty('--bg',      '#0f0f0f');
+      document.documentElement.style.setProperty('--surface', '#1a1a1a');
+      document.documentElement.style.setProperty('--border',  '#2a2a2a');
+      document.documentElement.style.setProperty('--text',    '#f0f0f0');
+      document.documentElement.style.setProperty('--muted',   '#888888');
+      btn.textContent = '☀️ Light'; isDark = true;
+    }
+    function setLight() {
+      document.documentElement.style.setProperty('--bg',      '#f5f5f5');
+      document.documentElement.style.setProperty('--surface', '#ffffff');
+      document.documentElement.style.setProperty('--border',  '#e0e0e0');
+      document.documentElement.style.setProperty('--text',    '#111111');
+      document.documentElement.style.setProperty('--muted',   '#777777');
+      btn.textContent = '🌙 Dark'; isDark = false;
+    }
+    function setCustom() {
+      document.documentElement.style.setProperty('--bg',      CONFIG.customBg);
+      document.documentElement.style.setProperty('--surface', CONFIG.customBg);
+      document.documentElement.style.setProperty('--border',  CONFIG.customText + '33');
+      document.documentElement.style.setProperty('--text',    CONFIG.customText);
+      document.documentElement.style.setProperty('--muted',   CONFIG.customText + 'aa');
+    }
+
+    if      (CONFIG.darkMode === true)     { setDark(); }
+    else if (CONFIG.darkMode === false)    { setLight(); }
+    else if (CONFIG.darkMode === 'custom') { setCustom(); }
+    else { setDark(); btn.style.display = 'block'; }
+
+    btn.addEventListener('click', function() { isDark ? setLight() : setDark(); });
+
+    document.getElementById('profileName').textContent     = CONFIG.name;
+    document.getElementById('profileUsername').textContent = CONFIG.username;
+    document.getElementById('profileBio').textContent      = CONFIG.bio;
+
+    var avatarEl = document.getElementById('avatar');
+    if (CONFIG.avatar) {
+      avatarEl.innerHTML = '<img src="' + CONFIG.avatar + '" alt="' + CONFIG.name + '"/>';
+    } else {
+      avatarEl.textContent = CONFIG.name.charAt(0).toUpperCase();
+    }
+
+    var linkList = document.getElementById('linkList');
+    CONFIG.links.forEach(function(link) {
+      var a = document.createElement('a');
+      a.href = link.url; a.className = 'link-btn';
+      a.textContent = link.label; a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      linkList.appendChild(a);
+    });
+  </script>
+</body>
+</html>
