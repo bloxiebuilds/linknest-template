@@ -22,7 +22,7 @@
 
 ## 📖 Full Instructions
 
-New here? Check out **[INSTRUCTIONS.md](./INSTRUCTIONS.md)** for a full step-by-step guide.
+New here? Check out **[INSTRUCTIONS.md](./instructions.md)** for a full step-by-step guide.
 
 ---
 
